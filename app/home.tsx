@@ -12,7 +12,6 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { images } from "@/constants/images"
 
 export default function Index() {
-  
   const styles = StyleSheet.create({
     background: {
       flex: 1,
@@ -70,7 +69,7 @@ export default function Index() {
     Animated.loop(
       Animated.sequence([
         Animated.timing(cloudAnim1, {
-          toValue: Math.random() * 5 - 15 * Math.random(),
+          toValue: Math.random() * 8 - 15 * Math.random(),
           duration: 3000,
           useNativeDriver: true,
         }),
@@ -87,7 +86,7 @@ export default function Index() {
     Animated.loop(
       Animated.sequence([
         Animated.timing(cloudAnim2, {
-          toValue: Math.random() * 30 - 15 * Math.random(),
+          toValue: Math.random() * 30 - 80 * Math.random(),
           duration: 3000,
           useNativeDriver: true,
         }),
