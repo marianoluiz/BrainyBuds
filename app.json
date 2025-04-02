@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "BrainyBuds",
-    "slug": "BrainyBuds",
+    "name": "BrainyPals",
+    "slug": "BrainyPals",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
