@@ -1,4 +1,4 @@
-import { View, Text, Animated } from 'react-native'
+import { View, Text, Animated, StyleSheet } from 'react-native'
 import { images } from "@/constants/images";
 
 import { ImageStyle } from 'react-native';
@@ -26,12 +26,12 @@ const Cloud = ({ style, translateX, translateY }: CloudProps) => {
   );
 }
 
-const cloudStyles: ImageStyle[] = [
-  { position: "absolute", top: 10, right: -35, width: 107, height: 72 },
-  { position: "absolute", top: 70, left: 50, width: 107, height: 72 },
-  { position: "absolute", top: 150, right: 80, width: 107, height: 72 },
-  { position: "absolute", left: -60, top: 200, width: 160, height: 111 },
-  { position: "absolute", right: -60, top: 200, width: 200, height: 101 },
-];
+const cloudStyles = StyleSheet.create({
+  cloud1: { position: 'absolute', top: 10, right: -35, width: 107, height: 72, zIndex: 1 },
+  cloud2: { position: 'absolute', top: 70, left: 50, width: 107, height: 72, zIndex: 1 },
+  cloud3: { position: 'absolute', top: 150, right: 80, width: 107, height: 72, zIndex: 1 },
+  cloud4: { position: 'absolute', left: -60, top: 200, width: 160, height: 111, zIndex: 1 },
+  cloud5: { position: 'absolute', right: -60, top: 200, width: 200, height: 101, zIndex: 1 },
+});
 
 export { Cloud, cloudStyles };

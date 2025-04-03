@@ -20,7 +20,7 @@ const useCloudAnimation = (rangeX: number, rangeY: number, duration: number) => 
           useNativeDriver: true,
         }),
         Animated.timing(animX, {
-          toValue: -rangeX,
+          toValue: -rangeX / 1.5,
           duration: duration,
           useNativeDriver: true,
         }),
