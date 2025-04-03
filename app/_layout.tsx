@@ -1,6 +1,7 @@
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import { Header } from "react-native/Libraries/NewAppScreen";
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -20,9 +21,7 @@ export default function RootLayout() {
   
   return (
     <Stack>
-      {/* Hide the header for the home screen */}
       <Stack.Screen name="home" options={{ headerShown: false }} />
     </Stack>
   );
-
 }

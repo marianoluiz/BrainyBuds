@@ -1,15 +1,24 @@
-import { Text, View, Image, StyleSheet, Animated, TouchableHighlight } from "react-native";
+import { Text, View, Image, StyleSheet, Animated, TouchableHighlight, TextInput } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { router, useRouter } from "expo-router";
+import { useState } from "react";
 
 import { Cloud, cloudStyles } from "@/components/Cloud";
 import { images } from "@/constants/images"
 import useCloudAnimation from "@/hooks/useCloudAnimation";
 import useElephantAnimation from "@/hooks/useElephantAnimation";
-import Button from "@/components/Button";
+import ButtonTemplate from "@/components/Button";
+import { useUser } from "@/hooks/useUser";
+import ModalTemplate from "@/components/Modal";
 
+export default function Home() {
+  
+  const { username, setUsername } = useUser();
+  const [ tempUsername, setTempUsername ] = useState<string>("");
 
-export default function Index() {
+  // input name modal
+  const [isModalVisible, setModalVisible] = useState(false);
+
   const styles = StyleSheet.create({
     background: {
       flex: 1,
@@ -25,14 +34,22 @@ export default function Index() {
     elephant: {
       marginTop: 25,
       height: 300,
-      width:  350,
-      zIndex: 2
+      width: 350,
+      zIndex: 2,
     },
     btnContainer: {
       flexDirection: "row",
       marginTop: 45,
       gap: 10,
-    }
+    },
+    input: {
+      borderWidth: 1,
+      borderColor: "#ccc",
+      borderRadius: 5,
+      padding: 10,
+      width: "100%",
+      marginBottom: 18,
+    },
   });
 
   const cloudAnimations = [
@@ -43,12 +60,17 @@ export default function Index() {
     useCloudAnimation(30, 10, 9000), // Larger range, very slow and smooth
   ];
 
+  // w/o checking
   const navigateToDashboard = () => {
-    router.push("/dashboard");
+    if (username === "") {
+        setModalVisible(true);
+        return;
+    }
+    router.navigate("/dashboard");
   };
 
   const navigateToLeaderboard = () => {
-    router.push("/leaderboard");
+    router.navigate("/leaderboard");
   };
 
   return (
@@ -79,9 +101,45 @@ export default function Index() {
 
         {/* Small Buttons */}
         <View style={styles.btnContainer}>
-          <Button title={"Play Now"} onPress={navigateToDashboard}></Button>
-          <Button title={"Leaderboard"} onPress={navigateToLeaderboard}></Button>
+          <ButtonTemplate
+            title={"Play Now"}
+            onPress={navigateToDashboard}
+            btnSize="mid"
+          ></ButtonTemplate>
+          <ButtonTemplate
+            title={"Leaderboard"}
+            onPress={navigateToLeaderboard}
+            btnSize="mid"
+          ></ButtonTemplate>
         </View>
+
+        {/* Modal */}
+        <ModalTemplate
+          isModalVisible={isModalVisible}
+          title={"What should we call you ?"}
+          desc={"Set a username before fun starts!"}
+        >
+          {/* children */}
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your username"
+            value={tempUsername}
+            onChangeText={setTempUsername}
+          />
+          <ButtonTemplate
+            title={"Save"}
+            onPress={() => {
+              if (tempUsername.trim() !== "") {
+                setUsername(tempUsername.trim());
+                setModalVisible(false);
+                router.navigate("/dashboard");
+              } else {
+                alert("Please enter a valid name.");
+              }
+            }}
+            btnSize={"small"}
+          />
+        </ModalTemplate>
       </SafeAreaView>
     </SafeAreaProvider>
   );
