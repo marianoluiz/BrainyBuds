@@ -8,7 +8,7 @@ import { images } from "@/constants/images"
 import useCloudAnimation from "@/hooks/useCloudAnimation";
 import useElephantAnimation from "@/hooks/useElephantAnimation";
 import ButtonTemplate from "@/components/Button";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/context/UserContext";
 import ModalTemplate from "@/components/Modal";
 
 export default function Home() {
@@ -18,39 +18,6 @@ export default function Home() {
 
   // input name modal
   const [isModalVisible, setModalVisible] = useState(false);
-
-  const styles = StyleSheet.create({
-    background: {
-      flex: 1,
-      alignItems: "center",
-      backgroundColor: "#FEE9CA",
-    },
-    title: {
-      marginTop: 120,
-      height: 65,
-      width: 310,
-      zIndex: 99,
-    },
-    elephant: {
-      marginTop: 25,
-      height: 300,
-      width: 350,
-      zIndex: 2,
-    },
-    btnContainer: {
-      flexDirection: "row",
-      marginTop: 45,
-      gap: 10,
-    },
-    input: {
-      borderWidth: 1,
-      borderColor: "#ccc",
-      borderRadius: 5,
-      padding: 10,
-      width: "100%",
-      marginBottom: 18,
-    },
-  });
 
   const cloudAnimations = [
     useCloudAnimation(-20, 10, 8000), // Very slow horizontal drift, subtle vertical bobbing
@@ -144,3 +111,36 @@ export default function Home() {
     </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#FEE9CA",
+  },
+  title: {
+    marginTop: 120,
+    height: 65,
+    width: 310,
+    zIndex: 99,
+  },
+  elephant: {
+    marginTop: 25,
+    height: 300,
+    width: 350,
+    zIndex: 2,
+  },
+  btnContainer: {
+    flexDirection: "row",
+    marginTop: 45,
+    gap: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    padding: 10,
+    width: "100%",
+    marginBottom: 18,
+  },
+});
